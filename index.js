@@ -1,6 +1,8 @@
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const fs = require('fs');
 require('dotenv').config();
+const { readCoinPrice, updateCoinPrice, readPriceHistory, startPriceUpdates } = require('./utils/coinPrice');
+
 
 const client = new Client({
     intents: [
@@ -24,6 +26,7 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}`);
+    startPriceUpdates(client);
 });
 
 client.on('messageCreate', (message) => {

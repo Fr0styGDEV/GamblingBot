@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { Client } = require('discord.js');
 
 const stockPriceFilePath = path.join(__dirname, '../storage/stockPrice.json'); // New file for stock price
 const priceHistoryFilePath = path.join(__dirname, '../storage/priceHistory.json'); // New file for price history
@@ -38,9 +39,9 @@ function writePriceHistory(history) {
 }
 
 // Simulate stock price changes
-function updateCoinPrice() {
+function updateCoinPrice(client) {
     const currentPrice = readCoinPrice();
-    const change = (Math.random() - 0.5) * 60;  // Random change between -15 and +15
+    const change = (Math.random() - 0.5) * 60;  // Random change between -30 and +30
     let newPrice = Math.round(currentPrice + change);
     if (newPrice < 10) newPrice = 10;  // Prevent price from dropping below 10
     writeCoinPrice(newPrice);
@@ -54,10 +55,22 @@ function updateCoinPrice() {
     writePriceHistory(priceHistory);
 
     console.log(`New coin price: ${newPrice}`);
+
+    // Check if the price equals 10 and notify everyone
+    if (newPrice === 10) {
+        const channel = client.channels.cache.get('1318282259811536998'); // Replace with your channel ID
+        if (channel) {
+            channel.send('@everyone 🚨 FrostyCoin price has dropped to the minimum value of **10**! 🚨');
+        } else {
+            console.error('Channel not found. Please check the channel ID.');
+        }
+    }
 }
 
 // Update the coin price every 1 minute (60000ms)
-setInterval(updateCoinPrice, 60000);
+function startPriceUpdates(client) {
+    setInterval(() => updateCoinPrice(client), 60000);
+}
 
 // Export functions
-module.exports = { readCoinPrice, updateCoinPrice, readPriceHistory };
+module.exports = { readCoinPrice, updateCoinPrice, readPriceHistory, startPriceUpdates };
