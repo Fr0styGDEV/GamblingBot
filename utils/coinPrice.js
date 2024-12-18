@@ -37,13 +37,15 @@ function readPriceHistory() {
 function writePriceHistory(history) {
     fs.writeFileSync(priceHistoryFilePath, JSON.stringify(history, null, 2));
 }
+const minCoinPrice = 10;
+const alertMaxPrice = 1000;
 
 // Simulate stock price changes
 function updateCoinPrice(client) {
     const currentPrice = readCoinPrice();
     const change = (Math.random() - 0.5) * 60;  // Random change between -30 and +30
     let newPrice = Math.round(currentPrice + change);
-    if (newPrice < 10) newPrice = 10;  // Prevent price from dropping below 10
+    if (newPrice < minCoinPrice) newPrice = minCoinPrice;  // Prevent price from dropping below 10
     writeCoinPrice(newPrice);
 
     // Update price history with the new price
@@ -57,10 +59,19 @@ function updateCoinPrice(client) {
     console.log(`New coin price: ${newPrice}`);
 
     // Check if the price equals 10 and notify everyone
-    if (newPrice === 10) {
-        const channel = client.channels.cache.get('1318282259811536998'); // Replace with your channel ID
+    if (newPrice === minCoinPrice) {
+        const channel = client.channels.cache.get('1318282259811536998');
         if (channel) {
-            channel.send('@everyone 🚨 FrostyCoin price has dropped to the minimum value of **10**! 🚨');
+            channel.send('@everyone 🚨 FrostyCoin®💎 price has dropped to the minimum value of **10**! 🚨');
+        } else {
+            console.error('Channel not found. Please check the channel ID.');
+        }
+    }
+    // Check if the price is greater than 300
+    if (newPrice >= alertMaxPrice) {
+        const channel = client.channels.cache.get('1318282259811536998');
+        if (channel) {
+            channel.send('@everyone 🚨 FrostyCoin®💎 has surpassed **1000**!🚨');
         } else {
             console.error('Channel not found. Please check the channel ID.');
         }
