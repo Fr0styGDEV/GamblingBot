@@ -37,9 +37,18 @@ module.exports = {
         }
 
         try {
-            // Step 2: Generate a gaming trivia question
+            // Step 2: Generate a gaming trivia question with difficulty scaling
+            let difficulty;
+            if (betAmount <= 10000) {
+                difficulty = 'easy';
+            } else if (betAmount <= 500000) {
+                difficulty = 'medium';
+            } else {
+                difficulty = 'hard';
+            }
+
             const prompt = `
-            Generate a single multiple-choice gaming trivia question. The question should be about one of the following games: Minecraft, Rainbow Six Siege, Dead by Daylight, Phasmophobia, CS2, Valorant, or Elden Ring. If none of these games fit, or just to add some diversity, choose another popular game. Ensure the trivia is well-suited to the contestants' knowledge.
+            Generate a single multiple-choice gaming trivia question with a ${difficulty} difficulty. The question should be about one of the following games: Minecraft, Rainbow Six Siege, Dead by Daylight, Phasmophobia, CS2, Valorant, or Elden Ring. If none of these games fit, or just to add some diversity, choose another popular game. Ensure the trivia is well-suited to the contestants' knowledge.
 
             The response must follow this exact format and include only one question:
             Question: [Your trivia question here]
@@ -91,7 +100,7 @@ module.exports = {
             const filter = (response) => response.author.id === userId;
             const collector = message.channel.createMessageCollector({
                 filter,
-                time: 120000, // 2 minutes to respond
+                time: 30000, // 30 seconds to respond
             });
 
             collector.on('collect', async (userMessage) => {
@@ -122,4 +131,3 @@ module.exports = {
         }
     },
 };
-
