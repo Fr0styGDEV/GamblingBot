@@ -12,7 +12,7 @@ GamblingBOT is a Discord bot that adds an engaging and interactive gambling and 
 - Real-time updates to FrostyCoin price.
 - `!buy [amount]`: Buy FrostyCoin at the current price.
 - `!sell [amount]`: Sell your FrostyCoin and gain profits (or losses).
-- `!graph`: Displays a graphical representation of FrostyCoin’s recent price history and user’s holdings.
+- `!fc`: Displays a graphical representation of FrostyCoin’s recent price history and user’s holdings.
 
 ### Leveling System
 - `!levelup [amount]`: Spend coins to level up. Levels scale exponentially in cost.
