@@ -13,9 +13,23 @@ const activeChallenges = new Map();
 module.exports = {
     names: ['earn'],
     description: 'Earn coins by answering gaming trivia questions!',
-    async execute(message) {
+    async execute(message, args) {
         const userId = message.author.id;
-        const CurrentBalance = getBalance(message.author.id);
+        const currentBalance = getBalance(userId);
+
+        // Validate the bet amount
+        const betAmount = parseInt(args[0], 10);
+        if (isNaN(betAmount) || betAmount <= 0) {
+            return message.reply('Please specify a valid bet amount (e.g., `!earn 200`).');
+        }
+
+        if (betAmount > 1000000) {
+            return message.reply('The maximum bet amount for !earn is 🪙 1,000,000. Please enter a lower amount.');
+        }
+
+        if (currentBalance < betAmount) {
+            return message.reply(`You do not have enough coins to bet 🪙 ${betAmount}. Your current balance is 🪙 ${currentBalance}.`);
+        }
 
         // Step 1: Check if the user already has an active challenge
         if (activeChallenges.has(userId)) {
@@ -34,12 +48,7 @@ module.exports = {
             C: [Option C]
             D: [Option D]
             Correct Answer: [The correct option]
-
-            Do not generate more than one question in the response.
             `;
-
-
-
 
             const completion = await openai.chat.completions.create({
                 model: 'gpt-3.5-turbo',
@@ -66,15 +75,17 @@ module.exports = {
             const triviaLines = triviaText.split('\n').filter(line => !line.startsWith('Correct Answer:'));
             const filteredTriviaText = triviaLines.join('\n');
 
+            // Deduct the bet amount from the user's balance
+            updateBalance(userId, currentBalance - betAmount);
+
             // Send the trivia question to the user
             const embed = new EmbedBuilder()
                 .setColor('#00FF00')
-                .setTitle('10,000 🪙 Gaming Trivia Challenge!')
+                .setTitle(`${betAmount} 🪙 Gaming Trivia Challenge!`)
                 .setDescription(filteredTriviaText)
                 .setFooter({ text: 'Reply with A, B, C, or D to answer!' });
 
             const triviaMessage = await message.channel.send({ embeds: [embed] });
-
 
             // Step 3: Create a message collector to listen for the user's reply
             const filter = (response) => response.author.id === userId;
@@ -88,8 +99,9 @@ module.exports = {
 
                 // Check if the answer is correct
                 if (userAnswer === correctAnswer) {
-                    message.reply('🎉 Correct! You earned 10,000 🪙');
-                    updateBalance(message.author.id, CurrentBalance + 10000);
+                    const winnings = betAmount * 2;
+                    updateBalance(userId, getBalance(userId) + winnings);
+                    message.reply(`🎉 Correct! You earned 🪙 ${winnings}!`);
                 } else {
                     message.reply(`❌ Wrong answer. The correct answer was **${correctAnswer}**.`);
                 }
@@ -110,3 +122,4 @@ module.exports = {
         }
     },
 };
+
