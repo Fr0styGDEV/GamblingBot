@@ -38,13 +38,17 @@ module.exports = {
         // Determine the emoji based on the user's new role
         let roleEmoji = '';
         if (newLevel <= 100) {
-            roleEmoji = '🥉'; // Bronze
+            roleEmoji = '🥉 '; // Bronze
         } else if (newLevel <= 500) {
-            roleEmoji = '🥈'; // Silver
+            roleEmoji = '🥈 '; // Silver
         } else if (newLevel <= 1000) {
-            roleEmoji = '🥇'; // Gold
+            roleEmoji = '🥇 ';
+        } else if (newLevel <= 2000) {
+            roleEmoji = '❇️ ';
+        } else if (newLevel <= 5000) {
+            roleEmoji = '💎 ';
         } else {
-            roleEmoji = '💎'; // Emerald
+            roleEmoji = '👑 '; 
         }
 
         // Update the user's nickname to show their new level and role emoji
