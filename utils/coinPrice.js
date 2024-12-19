@@ -57,6 +57,11 @@ function updateCoinPrice(client) {
     writePriceHistory(priceHistory);
 
     console.log(`New coin price: ${newPrice}`);
+    if (newPrice < 1000){
+        below_alert = true;
+    } else {
+        below_alert = false;
+    }
 
     // Check if the price equals 10 and notify everyone
     if (newPrice === minCoinPrice) {
@@ -68,7 +73,7 @@ function updateCoinPrice(client) {
         }
     }
     // Check if the price is greater than 300
-    if (newPrice >= alertMaxPrice) {
+    if (newPrice >= alertMaxPrice && below_alert === true) {
         const channel = client.channels.cache.get('1318282259811536998');
         if (channel) {
             channel.send('@everyone 🚨 FrostyCoin®💎 has surpassed **1000**!🚨');
@@ -76,6 +81,7 @@ function updateCoinPrice(client) {
             console.error('Channel not found. Please check the channel ID.');
         }
     }
+    
 }
 
 // Update the coin price every 1 minute (60000ms)

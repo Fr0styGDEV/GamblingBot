@@ -25,7 +25,7 @@ module.exports = {
         try {
             // Step 2: Generate a gaming trivia question
             const prompt = `
-            Generate a single multiple-choice gaming trivia question. The question should be about one of the following games: Minecraft, Rainbow Six Siege, Dead by Daylight, Phasmophobia, CS2, Valorant, or Elden Ring. If none of these games fit, choose another popular game. Ensure the trivia is well-suited to the contestants' knowledge.
+            Generate a single multiple-choice gaming trivia question. The question should be about one of the following games: Minecraft, Rainbow Six Siege, Dead by Daylight, Phasmophobia, CS2, Valorant, or Elden Ring. If none of these games fit, or just to add some diversity, choose another popular game. Ensure the trivia is well-suited to the contestants' knowledge.
 
             The response must follow this exact format and include only one question:
             Question: [Your trivia question here]

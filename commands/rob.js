@@ -6,9 +6,9 @@ module.exports = {
     description: 'Rob another player (50/50 chance to steal coins).',
     async execute(message, args) {
         const targetUser = message.mentions.users.first();
-        if (message.author.id == 1025904820302921760) {
-            return message.reply(`<@${message.author.id}> is not allowed to use !rob`);
-        }
+        // if (message.author.id == 1025904820302921760) {
+        //     return message.reply(`<@${message.author.id}> is not allowed to use !rob`);
+        // }
         if (!targetUser) {
             return message.reply('Please mention a user to rob.');
         }
