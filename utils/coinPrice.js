@@ -39,6 +39,7 @@ function writePriceHistory(history) {
 }
 const minCoinPrice = 10;
 const alertMaxPrice = 1000;
+let below_alert = true;
 
 // Simulate stock price changes
 function updateCoinPrice(client) {
