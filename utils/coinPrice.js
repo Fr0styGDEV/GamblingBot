@@ -58,7 +58,7 @@ function updateCoinPrice(client) {
     writePriceHistory(priceHistory);
 
     console.log(`New coin price: ${newPrice}`);
-    if (newPrice < 1000){
+    if (newPrice <= 1000){
         below_alert = true;
     } else {
         below_alert = false;
@@ -74,7 +74,7 @@ function updateCoinPrice(client) {
         }
     }
     // Check if the price is greater than 300
-    if (newPrice >= alertMaxPrice && below_alert === true) {
+    if (newPrice >= alertMaxPrice && below_alert == true) {
         const channel = client.channels.cache.get('1318282259811536998');
         if (channel) {
             channel.send('@everyone 🚨 FrostyCoin®💎 has surpassed **1000**!🚨');
