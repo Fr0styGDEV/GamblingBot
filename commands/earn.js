@@ -48,7 +48,9 @@ module.exports = {
             }
 
             const prompt = `
-            Generate a single multiple-choice gaming trivia question with a ${difficulty} difficulty. The question should be about one of the following games: Minecraft, Rainbow Six Siege, Dead by Daylight, Phasmophobia, CS2, Valorant, or Elden Ring. If none of these games fit, or just to add some diversity, choose another popular game. Ensure the trivia is well-suited to the contestants' knowledge.
+            Generate a single multiple-choice gaming trivia question with a ${difficulty} difficulty. The question should be about one of the following games: Fortnite, Minecraft, Rainbow Six Siege, Dead by Daylight, Phasmophobia, CS2, Valorant, or Elden Ring.
+
+            Ensure the question is **factually accurate**, unambiguous, and based on official game mechanics or lore. Avoid generating misleading or unclear questions or answers. 
 
             The response must follow this exact format and include only one question:
             Question: [Your trivia question here]
@@ -57,6 +59,8 @@ module.exports = {
             C: [Option C]
             D: [Option D]
             Correct Answer: [The correct option]
+
+
             `;
 
             const completion = await openai.chat.completions.create({
@@ -89,10 +93,10 @@ module.exports = {
 
             // Send the trivia question to the user
             const embed = new EmbedBuilder()
-                .setColor('#00FF00')
-                .setTitle(`${betAmount} 🪙 Gaming Trivia Challenge!`)
-                .setDescription(filteredTriviaText)
-                .setFooter({ text: 'Reply with A, B, C, or D to answer!' });
+            .setColor('#00FF00')
+            .setTitle(`${betAmount} 🪙 Gaming Trivia Challenge!`)
+            .setDescription(`${filteredTriviaText}\n\n<@${userId}> Reply with A, B, C, or D to answer!`)
+            .setFooter({ text: 'You have 30 seconds to answer!' });
 
             const triviaMessage = await message.channel.send({ embeds: [embed] });
 

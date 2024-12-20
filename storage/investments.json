@@ -3,8 +3,12 @@
     "amount": 1000,
     "priceAtPurchase": 709
   },
+  "799382476102565929": {
+    "amount": 9000,
+    "priceAtPurchase": 218
+  },
   "783036885299626015": {
-    "amount": 1000000,
-    "priceAtPurchase": 802
+    "amount": 2100000000,
+    "priceAtPurchase": 10
   }
 }
