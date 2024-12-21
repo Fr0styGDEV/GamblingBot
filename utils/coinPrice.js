@@ -91,4 +91,4 @@ function startPriceUpdates(client) {
 }
 
 // Export functions
-module.exports = { readCoinPrice, updateCoinPrice, readPriceHistory, startPriceUpdates };
+module.exports = { readCoinPrice, updateCoinPrice, readPriceHistory, startPriceUpdates, writeCoinPrice };
