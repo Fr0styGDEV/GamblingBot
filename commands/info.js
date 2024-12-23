@@ -20,9 +20,10 @@ module.exports = {
                 { name: '!sell', value: 'Sell your FrostyCoin®💎 at the current market value.', inline: true },
                 { name: '!earn', value: 'Answer gaming related trivia questions for coins!', inline: true },
                 { name: '!levelup <levels>', value: 'Spend coins to level up and increase your rank.', inline: true },
+                { name: '!selllevel <levels>', value: 'Sell levels to get coins refunded', inline: true },
                 { name: '!info / !commands', value: 'Display this help message with all commands.', inline: true }
             )
-            .setFooter({ text: 'GamblingBOT® - Have fun and gamble responsibly! 😉', }) // Replace with an icon URL if desired
+            .setFooter({ text: 'GamblingBOT® - Have fun and gamble *responsibly*! 😉', })
             .setTimestamp();
 
         message.reply({ embeds: [embed] });
