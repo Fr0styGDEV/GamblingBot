@@ -19,7 +19,7 @@ module.exports = {
         if (levelsToSell < 0) {
             return message.reply(`You think im stupid?`);
         }
-        const refundAmount = calculateLevelRefund(currentLevel, levelsToSell, baseCost = 1000, scaleFactor = 1.05, refundRate = 1);
+        const refundAmount = calculateLevelRefund(currentLevel, levelsToSell);
         updateBalance(userId, currentBalance + refundAmount);
         const newBalance = getBalance(userId);
         const newLevel = currentLevel - levelsToSell;
@@ -42,4 +42,4 @@ module.exports = {
             );
         }
     }
-}    
+}

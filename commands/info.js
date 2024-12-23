@@ -23,7 +23,7 @@ module.exports = {
                 { name: '!selllevel <levels>', value: 'Sell levels to get coins refunded', inline: true },
                 { name: '!info / !commands', value: 'Display this help message with all commands.', inline: true }
             )
-            .setFooter({ text: 'GamblingBOT® - Have fun and gamble *responsibly*! 😉', })
+            .setFooter({ text: 'GamblingBOT® - Have fun and gamble responsibly! 😉', })
             .setTimestamp();
 
         message.reply({ embeds: [embed] });

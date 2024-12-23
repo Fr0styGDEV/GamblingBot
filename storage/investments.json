@@ -1,10 +1,14 @@
 {
   "799382476102565929": {
-    "amount": 17200,
+    "amount": 17600,
     "priceAtPurchase": 10
   },
   "805164838136446976": {
     "amount": 1052169,
     "priceAtPurchase": 57
+  },
+  "783036885299626015": {
+    "amount": 99870000000,
+    "priceAtPurchase": 10
   }
 }

@@ -73,7 +73,7 @@ module.exports = {
 
         // Display user's investment info (amount owned and price at purchase)
         const investmentInfo = amountOwned > 0
-            ? `<@${message.author.id}>, you own ${amountOwned} FrostyCoin(s) bought at ${priceAtPurchase} each. Worth ${(amountOwned * currentValue).toLocaleString()} 🪙 at current FrostyCoin®💎 Value`
+            ? `<@${message.author.id}>, you own ${amountOwned.toLocaleString()} FrostyCoin(s) bought at ${priceAtPurchase.toFixed(2)} each. Worth ${(amountOwned * currentValue).toLocaleString()} 🪙 at current FrostyCoin®💎 Value`
             : `<@${message.author.id}>, you currently don\'t own any FrostyCoin.`;
 
         // Create the embed with the current coin price in the header

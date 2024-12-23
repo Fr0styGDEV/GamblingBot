@@ -6,9 +6,9 @@
 function updateNick(member, newLevel, userName, userId) {
     let roleEmoji = '';
     if (newLevel <= 100) {
-        roleEmoji = '🥉 '; // Bronze
+        roleEmoji = '🥉 ';
     } else if (newLevel <= 500) {
-        roleEmoji = '🥈 '; // Silver
+        roleEmoji = '🥈 ';
     } else if (newLevel <= 1000) {
         roleEmoji = '🥇 ';
     } else if (newLevel <= 2000) {

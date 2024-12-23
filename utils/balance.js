@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const balanceFilePath = path.join(__dirname, '../storage/balances.json');
+const investmentsFile = path.join(__dirname, '../storage/investments.json');
+
 
 // Helper function to read the balance file
 function readBalances() {
@@ -45,6 +47,18 @@ function updateUserStock(userId, stockAmount) {
     balances[userId].stock = stockAmount;
     writeBalances(balances);
 }
-
-module.exports = { getBalance, updateBalance, readBalances, getUserStock, updateUserStock };
+function readInvestments(){
+    const data = fs.readFileSync(investmentsFile, 'utf-8');
+    return JSON.parse(data);
+}
+function getUserInvestments(userId) {
+    const userInvestment = readInvestments();
+    return userInvestment[userId];
+}
+function writeUserInvestments(userId, investment) {
+    const investments = readInvestments();
+    investments[userId] = investment;
+    fs.writeFileSync(investmentsFile, JSON.stringify(investments, null, 2));
+}
+module.exports = { getBalance, updateBalance, readBalances, getUserStock, updateUserStock, getUserInvestments, writeUserInvestments };
 
