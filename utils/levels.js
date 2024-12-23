@@ -26,6 +26,20 @@ function setPlayerLevel(userId, level) {
 function calculateLevelCost(currentLevel, baseCost = 1000, scaleFactor = 1.05) {
     return Math.floor(baseCost * Math.pow(currentLevel, scaleFactor));
 }
+function calculateLevelRefund(currentLevel, levelsToSell, baseCost = 1000, scaleFactor = 1.05, refundRate = 1) {
+    let totalRefund = 0;
+
+    for (let i = 0; i < levelsToSell; i++) {
+        const levelToRefund = currentLevel - i; // Start from the highest level
+        if (levelToRefund <= 0) break; // Prevent invalid levels
+
+        const cost = Math.floor(baseCost * Math.pow(levelToRefund, scaleFactor)); // Cost of this level
+        totalRefund += Math.floor(cost * refundRate); // Apply refund rate
+    }
+
+    return totalRefund; // Return total refund amount
+}
+
 
 // Attempt to level up a player
 function levelUpPlayer(userId, currentBalance, baseCost = 1000, scaleFactor = 1.05) {
@@ -46,4 +60,5 @@ module.exports = {
     setPlayerLevel,
     calculateLevelCost,
     levelUpPlayer,
+    calculateLevelRefund,
 };

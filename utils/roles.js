@@ -1,9 +1,9 @@
 /**
  * Assigns a role to a member based on their level.
  * 
- * @param {GuildMember} member - The Discord member to assign the role to.
- * @param {number} newLevel - The member's new level.
- * @param {Guild} guild - The Discord guild (server) where the roles are managed.
+ * @param {GuildMember} member
+ * @param {number} newLevel
+ * @param {Guild} guild
  */
 async function assignRole(member, newLevel, guild) {
     const roles = {
@@ -46,6 +46,8 @@ async function assignRole(member, newLevel, guild) {
         console.error(`Failed to assign role for member ${member.user.tag}:`, err);
     }
 }
+
+// add function for managing players nicknames
 
 module.exports = {
     assignRole,

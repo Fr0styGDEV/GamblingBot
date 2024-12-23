@@ -1,6 +1,8 @@
 const { getBalance, updateBalance } = require('../utils/balance');
 const { getPlayerLevel, levelUpPlayer, calculateLevelCost, setPlayerLevel } = require('../utils/levels');
-const { assignRole } = require('../utils/roles'); // Import the role assignment function
+const { assignRole } = require('../utils/roles');
+const { updateNick } = require('../utils/nickname');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     names: ['levelup'],
@@ -30,47 +32,28 @@ module.exports = {
         }
 
         // Update balance and levels
+        
         updateBalance(userId, currentBalance - totalCost);
+        const newBalance = currentBalance - totalCost;
 
         const newLevel = currentLevel + levelsToBuy;
         setPlayerLevel(userId, newLevel);
+ 
 
-        // Determine the emoji based on the user's new role
-        let roleEmoji = '';
-        if (newLevel <= 100) {
-            roleEmoji = '🥉 '; // Bronze
-        } else if (newLevel <= 500) {
-            roleEmoji = '🥈 '; // Silver
-        } else if (newLevel <= 1000) {
-            roleEmoji = '🥇 ';
-        } else if (newLevel <= 2000) {
-            roleEmoji = '❇️ ';
-        } else if (newLevel <= 5000) {
-            roleEmoji = '💎 ';
-        } else {
-            roleEmoji = '👑 '; 
-        }
-
-        // Update the user's nickname to show their new level and role emoji
-        
-        
-        
-        let newNickname = `${roleEmoji} Lv. ${newLevel} ${message.member.user.username}`;
-        try {
-            if (userId === '783036885299626015'){
-                newNickname = `${roleEmoji} Lv. ${newLevel} Fr0styy.`;
-            }
-            await message.member.setNickname(newNickname);
-            // Assign the appropriate role
+        try { updateNick(message.member, newLevel, message.member.user.username, userId)
             await assignRole(message.member, newLevel, message.guild);
+            const embed = new EmbedBuilder()
+            .setColor('#00ff00')
+            .setTitle('🏅 Levelup! ⬆️')
+            .setDescription(`<@${message.author.id}> 🎉 Congrats! You leveled up to **Level ${newLevel.toLocaleString()}**! It cost you 🪙 ${totalCost.toLocaleString()}.`)
+            .addFields({ name: 'New Balance:', value: `${newBalance.toLocaleString()} 🪙.` })
+            .setFooter({ text: 'GamblingBOT®' });
 
-            message.reply(
-                `🎉 Congrats! You leveled up to **Level ${newLevel}**! It cost you 🪙 ${totalCost}. Your roles have been updated!`
-            );
+            message.channel.send({ embeds: [embed] });
         } catch (err) {
             console.error('Failed to update nickname or assign role:', err);
             message.reply(
-                `You leveled up to **Level ${newLevel}**, and it cost you 🪙 ${totalCost}, but I couldn't update your nickname or roles due to permission issues.`
+                `You leveled up to **Level ${newLevel.toLocaleString()}**, and it cost you 🪙 ${totalCost.toLocaleString()}, but I couldn't update your nickname or roles due to permission issues.`
             );
         }
     },
