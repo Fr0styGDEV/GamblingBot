@@ -114,7 +114,7 @@ module.exports = {
                 if (userAnswer === correctAnswer) {
                     const winnings = betAmount * 2;
                     updateBalance(userId, getBalance(userId) + winnings);
-                    message.reply(`🎉 Correct! You earned 🪙 ${winnings}!`);
+                    message.reply(`🎉 Correct! You earned 🪙 ${betAmount}!`);
                 } else {
                     message.reply(`❌ Wrong answer. The correct answer was **${correctAnswer}**.`);
                 }

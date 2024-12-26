@@ -13,6 +13,8 @@ async function assignRole(member, newLevel, guild) {
         emerald: '1319351508319473736',
         diamond: '1319390068678463609', 
         godTier: '1319393154344026193',
+        insanity: '1321144463849951404',
+        otherworldly: '1321146589653373000',
     };
 
     // Determine the role based on the level
@@ -27,8 +29,12 @@ async function assignRole(member, newLevel, guild) {
         roleToAdd = roles.emerald;
     } else if (newLevel <= 5000) {
         roleToAdd = roles.diamond;
-    } else {
+    } else if (newLevel <= 15000) {
         roleToAdd = roles.godTier;
+    } else if (newLevel <= 25000) {
+        roleToAdd = roles.insanity;
+    } else {
+        roleToAdd = roles.otherworldly;
     }
 
     // Fetch all roles of the guild

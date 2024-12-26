@@ -10,10 +10,13 @@ module.exports = {
         const userBalance = getBalance(userId);
         const userLevel = getPlayerLevel(userId);
         const userInvestment = getUserInvestments(userId);
-        const amountOwned = userInvestment.amount;
-        const priceAtPurchase = userInvestment.priceAtPurchase;
+        const amountOwned = userInvestment ? userInvestment.amount : 0;
+        const priceAtPurchase = userInvestment ? userInvestment.priceAtPurchase : 0;
         const nickname = message.member.nickname || userLevel; 
         const readNickLevel = nickname.split(' ').slice(0, 4).join(' ');
+        const userFcInfo = amountOwned > 0
+            ? `${amountOwned.toLocaleString()} 💎 bought at ${priceAtPurchase.toFixed(2)} each. Worth ${(amountOwned * currentValue).toLocaleString()} 🪙 at current FrostyCoin®💎 Value`
+            : `<@${message.author.id}>, you currently don\'t own any FrostyCoin.`;
 
 
         const userInfo = `<@${message.author.id}> 's GamblingBOT® Stats`;
@@ -24,7 +27,7 @@ module.exports = {
             .addFields(
                 { name: 'Level:', value: `${readNickLevel.toLocaleString()}`, inline: true },
                 { name: 'Balance:', value: `${userBalance.toLocaleString()} 🪙`, inline: true },
-                { name: 'FrostyCoin®💎:', value: `${amountOwned.toLocaleString()} 💎 bought at ${priceAtPurchase.toFixed(2)} 🪙 each.`, inline: true },
+                { name: 'FrostyCoin®💎:', value: `${userFcInfo}`, inline: true },
             )
             .setFooter({ text: 'GamblingBOT®', })
             .setTimestamp();

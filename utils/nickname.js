@@ -15,8 +15,12 @@ function updateNick(member, newLevel, userName, userId) {
         roleEmoji = '❇️ ';
     } else if (newLevel <= 5000) {
         roleEmoji = '💎 ';
+    } else if (newLevel <= 15000) {
+        roleEmoji = '👑 ';
+    } else if (newLevel <= 25000) {
+        roleEmoji = '🌠 ';
     } else {
-        roleEmoji = '👑 '; 
+        roleEmoji = '🛸 '; 
     }
     let newNickname = `${roleEmoji} Lv. ${newLevel} ${userName}`;
     //if it is me running the command set my nickname to my personal preference
