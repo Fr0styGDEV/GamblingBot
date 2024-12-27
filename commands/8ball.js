@@ -29,9 +29,9 @@ module.exports = {
         if (question.includes('gay') && question.includes('nolan') || question.includes(nolan) ) {
             response = 'Yes';
         }
-        if (question.includes('straight') && question.includes('nolan') || question.includes(nolan) ) {
-            response = 'No';
-        }
+        // if (question.includes('straight') && question.includes('nolan') || question.includes(nolan) ) {
+        //     response = 'No';
+        // }
         ///
 
         const embed = new EmbedBuilder()
