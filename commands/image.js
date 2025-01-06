@@ -1,6 +1,8 @@
 const { EmbedBuilder } = require('discord.js');
 const axios = require('axios');
 
+const BING_API_KEY = process.env.AZURE_KEY;
+
 module.exports = {
     names: ['image', 'img'],
     description: 'Searches Bing and returns a random image result.',
@@ -10,8 +12,6 @@ module.exports = {
             return message.reply('Please provide a search term. Example: `!image cat`');
         }
 
-        // Replace with your Bing Search API Key
-        const BING_API_KEY = 'cb0308f73c664e4d8ab323ef71ff65aa';
         const endpoint = 'https://api.bing.microsoft.com/v7.0/images/search';
 
         try {
