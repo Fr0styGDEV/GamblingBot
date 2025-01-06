@@ -29,13 +29,26 @@ client.once('ready', () => {
     startPriceUpdates(client);
 });
 
+const badWords = require('./utils/badwords');
+
 client.on('messageCreate', (message) => {
-    if (message.author.bot || !message.content.startsWith('!')) return;
+    // Ignore bot messages
+    if (message.author.bot) return;
+
+    // Check for bad words
+    const content = message.content.toLowerCase();
+    if (badWords.some(word => content.includes(word)) && !message.author.id == '783036885299626015') {
+        message.delete();
+        return message.channel.send(`<@${message.author.id}>, please watch your language! Your message was deleted`);
+    }
+
+    // Check for commands
+    if (!message.content.startsWith('!')) return;
 
     const args = message.content.slice(1).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
 
-    // Check if the command exists in the collection
+    // Check if the command exists
     const command = client.commands.get(commandName);
     if (!command) 
         return message.reply('Unrecognized command: ' + commandName);
@@ -47,5 +60,6 @@ client.on('messageCreate', (message) => {
         message.reply('There was an error executing that command.');
     }
 });
+
 
 client.login(process.env.BOT_TOKEN);

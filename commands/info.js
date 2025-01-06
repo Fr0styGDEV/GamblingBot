@@ -23,6 +23,7 @@ module.exports = {
                 { name: '!selllevel <levels>', value: 'Sell levels to get coins refunded', inline: true },
                 { name: '!8ball <question>', value: 'Ask the magic 8-ball a question.', inline: true }, 
                 { name: '!roleinfo', value: 'Displays information about server roles.', inline: true }, 
+                { name: '!image, !img', value: 'Searches Bing for an image', inline: true }, 
                 { name: '!info / !commands', value: 'Display this help message with all commands.', inline: true }
             )
             .setFooter({ text: 'GamblingBOT® - Have fun and gamble responsibly! 😉', })

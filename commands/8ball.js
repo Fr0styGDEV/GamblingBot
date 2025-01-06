@@ -26,7 +26,7 @@ module.exports = {
 
         /// check if the question is about nolan
         const nolan = '799382476102565929';
-        if (question.includes('gay') && question.includes('nolan') || question.includes(nolan) ) {
+        if (question.includes('gay') && question.includes('nolan') || question.includes(nolan) ) {  
             response = 'Yes';
         }
         // if (question.includes('straight') && question.includes('nolan') || question.includes(nolan) ) {
