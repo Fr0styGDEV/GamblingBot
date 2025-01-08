@@ -21,7 +21,7 @@ module.exports = {
                 },
                 params: {
                     q: query,
-                    safeSearch: 'off',
+                    safeSearch: 'Moderate',
                     count: 10 // Fetch 10 image results
                 }
             });

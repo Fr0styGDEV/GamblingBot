@@ -37,7 +37,7 @@ client.on('messageCreate', (message) => {
 
     // Check for bad words
     const content = message.content.toLowerCase();
-    if (badWords.some(word => content.includes(word)) && !message.author.id == '783036885299626015') {
+    if (badWords.some(word => content.includes(word)) && message.author.id != '783036885299626015') {
         message.delete();
         return message.channel.send(`<@${message.author.id}>, please watch your language! Your message was deleted`);
     }
