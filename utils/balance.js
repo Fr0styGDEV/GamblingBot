@@ -5,24 +5,20 @@ const balanceFilePath = path.join(__dirname, '../storage/balances.json');
 const investmentsFile = path.join(__dirname, '../storage/investments.json');
 
 
-// Helper function to read the balance file
 function readBalances() {
     const data = fs.readFileSync(balanceFilePath, 'utf8');
     return JSON.parse(data);
 }
 
-// Helper function to write the balance file
 function writeBalances(balances) {
     fs.writeFileSync(balanceFilePath, JSON.stringify(balances, null, 2));
 }
 
-// Function to get a user's balance
 function getBalance(userId) {
     const balances = readBalances();
     return balances[userId] || 10; // sets default balance
 }
 
-// Function to update a user's balance
 function updateBalance(userId, amount) {
     const balances = readBalances();
     if (!balances[userId]) {
@@ -32,13 +28,11 @@ function updateBalance(userId, amount) {
     writeBalances(balances);
 }
 
-// Function to get a user's stock
 function getUserStock(userId) {
     const balances = readBalances();
     return balances[userId]?.stock || 0;
 }
 
-// Function to update a user's stock
 function updateUserStock(userId, stockAmount) {
     const balances = readBalances();
     if (!balances[userId]) {
