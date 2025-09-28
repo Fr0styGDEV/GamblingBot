@@ -40,7 +40,7 @@ GamblingBOT is a Discord bot that adds an engaging and interactive gambling and 
 ### Setup
 1. Clone the repository:
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/Fr0styGDEV/GamblingBot.git
     cd GamblingBot
     ```
 
